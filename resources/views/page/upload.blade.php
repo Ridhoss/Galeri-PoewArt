@@ -16,6 +16,8 @@
     {{-- icon --}}
     <link rel="stylesheet" href="assets/icon/all.min.css">
     <script src="assets/icon/all.min.js"></script>
+    {{-- logo atas --}}
+    <link rel="shortcut icon" type="image/png" href="assets/default/logoatas.png" />
 
     <link rel="stylesheet" href="assets/upload/style.css">
 
@@ -142,8 +144,8 @@
                             <div class="card me-3 mb-3">
                                 <button type="button"
                                     class="btn btn-danger btn-sm position-absolute top-0 end-0 mt-2 me-2"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#hapuskeranjang{{ $data->id }}"><i class="fa-solid fa-trash"></i></button>
+                                    data-bs-toggle="modal" data-bs-target="#hapuskeranjang{{ $data->id }}"><i
+                                        class="fa-solid fa-trash"></i></button>
                                 <img src="{{ Storage::url('public/photo/' . $data->photo) }}" class="card-img-top"
                                     alt="">
                                 <div class="card-body">
@@ -166,7 +168,8 @@
                 <div class="footer-inner d-flex justify-content-end align-items-end">
                     <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal"
                         data-bs-target="#cancel">Cancel</button>
-                    <button type="submit" class="btn btn-primary" onclick="this.disabled=true;this.form.submit();">Publish</button>
+                    <button type="submit" class="btn btn-primary"
+                        onclick="this.disabled=true;this.form.submit();">Publish</button>
                 </div>
 
                 </form>
@@ -245,7 +248,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" onclick="this.disabled=true;this.form.submit();">Create</button>
+                        <button type="submit" class="btn btn-primary"
+                            onclick="this.disabled=true;this.form.submit();">Create</button>
                     </div>
                 </form>
             </div>

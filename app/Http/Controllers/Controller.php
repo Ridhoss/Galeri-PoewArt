@@ -75,19 +75,30 @@ class Controller extends BaseController
     }
 
     // upload
-    public function halamanupload()
+    public function halamanupload(Request $request)
     {
+        $status = $request->status;
+
+        if ($status != null) {
+            $dataalbum = album::select('*')
+                ->where('userId', Auth::user()->id)
+                ->where('id', $request->status);
+        } else {
+            $dataalbum = album::select('*')
+                ->where('userId', Auth::user()->id);
+        }
+
         $datakeranjang = keranjang::select('*')
             ->where('userId', Auth::user()->id);
 
-        $dataalbum = album::select('*')
-            ->where('userId', Auth::user()->id);
+
 
         return view('page.upload', [
             'user' => Auth::user(),
             'keranjang' => $datakeranjang->get(),
             'album' => $dataalbum->get(),
-            'countkeranjang' => $datakeranjang->count()
+            'countkeranjang' => $datakeranjang->count(),
+            'status' => $status,
         ]);
     }
 
@@ -112,9 +123,11 @@ class Controller extends BaseController
         $countlike = likefoto::select('*')
             ->where('userId', $user->id)->count();
         $followers = follow::select('*')
-            ->where('to', $user->id);
+            ->where('follows.to', $user->id)
+            ->join('users', 'users.id', '=', 'follows.who');
         $following = follow::select('*')
-            ->where('who', $user->id);
+            ->where('who', $user->id)
+            ->join('users', 'users.id', '=', 'follows.to');
 
         $foto = foto::select('*')
             ->where('userId', $user->id)
@@ -130,6 +143,8 @@ class Controller extends BaseController
             'infofollow' => $infofollow,
             'countfollowers' => $followers->count(),
             'countfollowing' => $following->count(),
+            'datafollowers' => $followers->get(),
+            'datafollowing' => $following->get(),
         ]);
     }
     // halaman edit profile
@@ -161,9 +176,11 @@ class Controller extends BaseController
         $countlike = likefoto::select('*')
             ->where('userId', $user->id)->count();
         $followers = follow::select('*')
-            ->where('to', $user->id);
+            ->where('follows.to', $user->id)
+            ->join('users', 'users.id', '=', 'follows.who');
         $following = follow::select('*')
-            ->where('who', $user->id);
+            ->where('who', $user->id)
+            ->join('users', 'users.id', '=', 'follows.to');
 
         $album = Album::select('albums.*', 'fotos.lokasifile AS foto', 'fotos.albumId')
             ->join('fotos', 'albums.id', '=', 'fotos.albumId')
@@ -181,6 +198,8 @@ class Controller extends BaseController
             'infofollow' => $infofollow,
             'countfollowers' => $followers->count(),
             'countfollowing' => $following->count(),
+            'datafollowers' => $followers->get(),
+            'datafollowing' => $following->get(),
         ]);
     }
 
@@ -205,9 +224,11 @@ class Controller extends BaseController
         $countlike = likefoto::select('*')
             ->where('userId', $user->id)->count();
         $followers = follow::select('*')
-            ->where('to', $user->id);
+            ->where('follows.to', $user->id)
+            ->join('users', 'users.id', '=', 'follows.who');
         $following = follow::select('*')
-            ->where('who', $user->id);
+            ->where('who', $user->id)
+            ->join('users', 'users.id', '=', 'follows.to');
 
         $like = likefoto::select('likefotos.*', 'fotos.*')
             ->join('fotos', 'fotos.id', '=', 'likefotos.fotoId')
@@ -224,6 +245,8 @@ class Controller extends BaseController
             'infofollow' => $infofollow,
             'countfollowers' => $followers->count(),
             'countfollowing' => $following->count(),
+            'datafollowers' => $followers->get(),
+            'datafollowing' => $following->get(),
         ]);
     }
 
@@ -242,7 +265,7 @@ class Controller extends BaseController
         } else if ($pisah[0] == "like") {
             $back = "/" . $kondisi;
         } else {
-            $back = "/home";
+            $back = "/" . $pisah[0];
         }
 
         $foto = foto::find($id);
@@ -357,6 +380,20 @@ class Controller extends BaseController
             'countdatauser' => $user->count(),
             'datafoto' => $foto->get(),
             'countdatafoto' => $foto->count()
+        ]);
+    }
+
+    // halaman like
+    public function halamanfollowing()
+    {
+        $following = follow::select('*')
+            ->where('follows.who', Auth::user()->id)
+            ->join('fotos', 'fotos.userId', '=', 'follows.to');
+
+        return view('page.following', [
+            'user' => Auth::user(),
+            'following' => $following->get(),
+            'countfollowing' => $following->count()
         ]);
     }
 }

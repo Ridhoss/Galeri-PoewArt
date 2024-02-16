@@ -114,7 +114,8 @@
                                     Comment</p>
                             </div>
                         </div>
-                        <p class="desk-l p-3" id="l-deskripsi">Deskripsi gambar Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <p class="text-secondary" id="l-tanggal">2 February 2023</p>
+                        <p class="desk-l px-3" id="l-deskripsi">Deskripsi gambar Lorem ipsum dolor sit amet consectetur adipisicing elit.
                             Deleniti
                             a, voluptates
                             impedit nobis ratione hic assumenda porro ex iure reiciendis, ab provident quibusdam asperiores
@@ -152,7 +153,7 @@
                             <input type="button" class="btn-r-content" value="Detail" data-judul="{{ $foto->judul }}"
                                 data-deskripsi="{{ $foto->deskripsi }}"
                                 data-gambar="{{ Storage::url('public/photo/' . $foto->lokasifile) }}"
-                                data-like="{{ $foto->total_like }} Likes" data-comment="{{ $foto->total_komen }} Comments">
+                                data-like="{{ $foto->total_like }} Likes" data-comment="{{ $foto->total_komen }} Comments" data-tanggal="{{ \Carbon\Carbon::createFromFormat('Y-m-d', $foto->tanggalfoto)->format('d F Y') }}">
                         </div>
                     @endforeach
 
@@ -177,6 +178,7 @@
                 var gambar = this.getAttribute('data-gambar');
                 var like = this.getAttribute('data-like');
                 var comment = this.getAttribute('data-comment');
+                var tanggal = this.getAttribute('data-tanggal');
 
                 // Memasukkan nilai atribut ke dalam elemen HTML yang sesuai
                 document.getElementById('l-foto').src = gambar;
@@ -184,6 +186,7 @@
                 document.getElementById('l-deskripsi').textContent = deskripsi;
                 document.getElementById('l-like').textContent = like;
                 document.getElementById('l-comment').textContent = comment;
+                document.getElementById('l-tanggal').textContent = tanggal;
             });
         });
     </script>

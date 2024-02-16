@@ -16,6 +16,8 @@
     {{-- icon --}}
     <link rel="stylesheet" href="assets/icon/all.min.css">
     <script src="assets/icon/all.min.js"></script>
+    {{-- logo atas --}}
+    <link rel="shortcut icon" type="image/png" href="assets/default/logoatas.png" />
 
     {{-- vanilla css --}}
     <link rel="stylesheet" href="assets/login/style.css">

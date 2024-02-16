@@ -42,6 +42,8 @@ Route::get('/seealbums{id}', [Controller::class, 'halamanalbum'])->middleware('a
 Route::get('/likes',[Controller::class, 'halamanlike'])->middleware('auth');
 // analytic
 Route::get('/analytic', [Controller::class, 'halamananalytic'])->middleware('auth');
+// following
+Route::get('/following', [Controller::class, 'halamanfollowing'])->middleware('auth');
 
 // search
 Route::get('/search', [Controller::class, 'halamansearch'])->middleware('auth');

@@ -121,3 +121,36 @@
     background-color: var(--white);
     color: var(--primary);
 }
+
+.follow-prfl {
+    cursor: pointer;
+}
+
+.follow-prfl:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+}
+
+.people-like-img {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.people-like-user {
+    font-size: 18px;
+}
+
+.sem-acc {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.sem-acc:hover {
+    text-decoration: underline;
+    color: var(--secondary);
+    cursor: pointer;
+}
+

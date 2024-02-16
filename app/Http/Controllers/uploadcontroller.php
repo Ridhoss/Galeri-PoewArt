@@ -135,7 +135,7 @@ class uploadcontroller extends Controller
 
         $ker->delete();
 
-        return redirect('/home')->with('berhasil', 'Your post has been successfully published!');
+        return redirect('/profile-' . Auth::user()->username)->with('berhasil', 'Your post has been successfully published!');
     }
 
     // create album
@@ -204,7 +204,7 @@ class uploadcontroller extends Controller
             $album->delete();
         }
 
-        return redirect('/profile-'.$request->username)->with('berhasil', 'Your post has been successfully deleted!');
+        return redirect('/profile-' . $request->username)->with('berhasil', 'Your post has been successfully deleted!');
     }
 
     // edit album
@@ -235,6 +235,6 @@ class uploadcontroller extends Controller
 
         $album->delete();
 
-        return redirect('/albums-'.$request->username)->with('berhasil', 'Your album has been successfully deleted!');
+        return redirect('/albums-' . $request->username)->with('berhasil', 'Your album has been successfully deleted!');
     }
 }

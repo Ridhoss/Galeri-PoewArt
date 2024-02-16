@@ -67,12 +67,39 @@
             transition: 0.3s;
             scale: 0.95;
         }
+
+        .pick-search {
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .pick-search:hover {
+            color: var(--secondary);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .i-pick {
+            color: var(--secondary);
+            cursor: pointer;
+        }
     </style>
 @endsection
 
 @section('content')
     <div class="p-4">
-        <div class="pb-4 border-bottom">
+        <div class="d-flex align-items-center justify-content-evenly mb-4">
+            <div class="border-start border-end px-5">
+                <h6 class="pick-search i-pick" id="btn-all">All</h6>
+            </div>
+            <div class="border-start border-end px-5">
+                <h6 class="pick-search" id="btn-post">Posts</h6>
+            </div>
+            <div class="border-start border-end px-5">
+                <h6 class="pick-search" id="btn-account">Accounts</h6>
+            </div>
+        </div>
+        <div class="pb-4 border-bottom mb-4" id="account-row">
             <p class="text-center">--- Account ---</p>
             @if ($countdatauser == 0)
                 <h1 class="text-center mt-4 fs-3 text-secondary"><i class="fa-solid fa-user me-3"></i>Can't find user with
@@ -95,10 +122,11 @@
                 </div>
             @endif
         </div>
-        <div class="mt-4">
+        <div class="pb-4 border-bottom mb-4" id="post-row">
             <p class="text-center">--- Post ---</p>
             @if ($countdatafoto == 0)
-                <h1 class="text-center mt-4 fs-3 text-secondary"><i class="fa-solid fa-images me-3"></i>Can't find photo with name {{ $oldsearch }}</h1>
+                <h1 class="text-center mt-4 fs-3 text-secondary"><i class="fa-solid fa-images me-3"></i>Can't find photo
+                    with name {{ $oldsearch }}</h1>
             @else
                 <div class="mt-4" data-masonry='{"percentPosition": true }'>
                     @foreach ($datafoto as $photo)
@@ -110,4 +138,41 @@
             @endif
         </div>
     </div>
+
+    <script>
+        var btnall = document.getElementById('btn-all');
+        var btnpost = document.getElementById('btn-post');
+        var btnacc = document.getElementById('btn-account');
+        var post = document.getElementById('post-row');
+        var acc = document.getElementById('account-row');
+
+        btnpost.addEventListener('click', function() {
+            acc.classList.add('d-none');
+            post.classList.remove('d-none');
+        
+            btnpost.classList.add('i-pick');
+            btnall.classList.remove('i-pick');
+            btnacc.classList.remove('i-pick');
+        });
+
+        btnacc.addEventListener('click', function() {
+            post.classList.add('d-none');
+            acc.classList.remove('d-none');
+        
+            btnpost.classList.remove('i-pick');
+            btnall.classList.remove('i-pick');
+            btnacc.classList.add('i-pick');
+        });
+
+        btnall.addEventListener('click', function() {
+            post.classList.remove('d-none');
+            acc.classList.remove('d-none');
+        
+            btnpost.classList.remove('i-pick');
+            btnall.classList.add('i-pick');
+            btnacc.classList.remove('i-pick');
+        });
+        
+    </script>
+
 @endsection

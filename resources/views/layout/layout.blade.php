@@ -17,6 +17,8 @@
     {{-- icon --}}
     <link rel="stylesheet" href="assets/icon/all.min.css">
     <script src="assets/icon/all.min.js"></script>
+    {{-- logo atas --}}
+    <link rel="shortcut icon" type="image/png" href="assets/default/logoatas.png" />
 
     {{-- vanilla --}}
     <link rel="stylesheet" href="assets/layout/style.css">
@@ -61,7 +63,8 @@
                 <div class="w-100 me-4">
                     <form action="/search" method="GET">
                         @csrf
-                        <input type="search" name="search" class="form-control" placeholder="Search" value="{{ isset($oldsearch) ? $oldsearch : '' }}">
+                        <input type="search" name="search" class="form-control" placeholder="Search"
+                            value="{{ isset($oldsearch) ? $oldsearch : '' }}">
                     </form>
                 </div>
             </div>
@@ -69,6 +72,7 @@
             <div class="navbar-nav">
                 <a class="nav-link" aria-current="page" href="/home">Home</a>
                 <a class="nav-link" href="/likes">Like</a>
+                <a class="nav-link" href="/following">Following</a>
             </div>
 
             <div class="navbar-nav ms-4">
@@ -87,11 +91,15 @@
                 <ul class="dropdown-menu p-2">
                     <li class="border-bottom pb-2 mb-2"><a class="dropdown-item disabled rounded"
                             href="#">{{ $user->nama }}</a></li>
-                    <li><a class="dropdown-item rounded text-secondary" href="/profile-{{ $user->username }}"><i class="fa-solid fa-user me-2"></i>View profile</a></li>
-                    <li><a class="dropdown-item rounded text-secondary" href="/likes"><i class="fa-solid fa-heart me-2"></i>Like</a></li>
-                    <li><a class="dropdown-item rounded text-secondary" href="/analytic"><i class="fa-solid fa-chart-simple me-2"></i>Analytics</a></li>
-                    <li class="border-top pt-2 mt-2"><a class="dropdown-item rounded text-secondary" data-bs-toggle="modal"
-                            data-bs-target="#logoutmodal"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
+                    <li><a class="dropdown-item rounded text-secondary" href="/profile-{{ $user->username }}"><i
+                                class="fa-solid fa-user me-2"></i>View profile</a></li>
+                    <li><a class="dropdown-item rounded text-secondary" href="/likes"><i
+                                class="fa-solid fa-heart me-2"></i>Like</a></li>
+                    <li><a class="dropdown-item rounded text-secondary" href="/analytic"><i
+                                class="fa-solid fa-chart-simple me-2"></i>Analytics</a></li>
+                    <li class="border-top pt-2 mt-2"><a class="dropdown-item rounded text-secondary"
+                            data-bs-toggle="modal" data-bs-target="#logoutmodal"><i
+                                class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
                 </ul>
             </div>
 

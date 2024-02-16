@@ -40,7 +40,9 @@
                 @endif
             </div>
             <h5>{{ $userprofile->username }}</h5>
-            <p>{{ $countfoto }} Posts, {{ $countfollowers }} Followers, {{ $countfollowing }} Following</p>
+            <p>{{ $countfoto }} Posts, <span class="follow-prfl" data-bs-toggle="modal"
+                    data-bs-target="#modalfollowers">{{ $countfollowers }} Followers</span>, <span class="follow-prfl"
+                    data-bs-toggle="modal" data-bs-target="#modalfollowing">{{ $countfollowing }} Following</span></p>
             {{-- <div class="d-flex align-items-center">
                 <div class="d-flex flex-column align-items-center me-4">
                     <h4>40</h4>
@@ -67,4 +69,70 @@
     </div>
 
     @yield('content-profile')
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalfollowers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Followers ({{ $countfollowers }})</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @if ($countfollowers == 0)
+                        <p class="text-center text-secondary mt-2">---- Doesn't have any followers ----</p>
+                    @else
+                        @foreach ($datafollowers as $fllwrs)
+                            <a href="/profile-{{ $fllwrs->username }}" class="sem-acc">
+                                <div class="pb-1 mb-1 border-bottom d-flex align-items-center">
+                                    @if ($fllwrs->foto == 'default.png')
+                                        <img src="assets/default/default.png" class="people-like-img">
+                                    @else
+                                        <img src="{{ Storage::url('public/users/' . $fllwrs->foto) }}"
+                                            class="people-like-img">
+                                    @endif
+                                    <h1 class="people-like-user mt-2 ms-2">{{ $fllwrs->username }}</h1>
+                                </div>
+                            </a>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalfollowing" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Following ({{ $countfollowing }})</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    @if ($countfollowing == 0)
+                        <p class="text-center text-secondary mt-2">---- Doesn't follow anyone ----</p>
+                    @else
+                        @foreach ($datafollowing as $fllwing)
+                            <a href="/profile-{{ $fllwing->username }}" class="sem-acc">
+                                <div class="pb-1 mb-1 border-bottom d-flex align-items-center">
+                                    @if ($fllwing->foto == 'default.png')
+                                        <img src="assets/default/default.png" class="people-like-img">
+                                    @else
+                                        <img src="{{ Storage::url('public/users/' . $fllwing->foto) }}"
+                                            class="people-like-img">
+                                    @endif
+                                    <h1 class="people-like-user mt-2 ms-2">{{ $fllwing->username }}</h1>
+                                </div>
+                            </a>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection

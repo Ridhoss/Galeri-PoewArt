@@ -17,14 +17,14 @@
 
 @section('content')
     <div class="p-4">
-        <h1 class="fs-2 pb-4 mb-5 border-bottom">Photos That You Like</h1>
-        @if ($countlike == 0)
-            <p class="text-center">--- You haven't liked any photos ---</p>
+        <h1 class="fs-2 pb-4 mb-5 border-bottom">Photos of people you follow</h1>
+        @if ($countfollowing == 0)
+            <p class="text-center">--- You haven't follow any account ---</p>
         @else
             <div class="" data-masonry='{"percentPosition": true }'>
-                @foreach ($like as $likes)
-                    <a href="/photo{{ $likes->id }}?status=likes" class="me-2 mb-2"><img
-                            src="{{ Storage::url('public/photo/' . $likes->lokasifile) }}"
+                @foreach ($following as $foll)
+                    <a href="/photo{{ $foll->id }}?status=following" class="me-2 mb-2"><img
+                            src="{{ Storage::url('public/photo/' . $foll->lokasifile) }}"
                             class="img-post-beranda border border-2"></a>
                 @endforeach
             </div>

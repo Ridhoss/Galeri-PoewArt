@@ -16,6 +16,7 @@
             --greenpastel: #74E291;
             --poppins: poppins;
         }
+
         @font-face {
             font-family: poppins;
             src: url(assets/icon/Poppins-Regular.ttf);
@@ -200,6 +201,12 @@
             color: var(--secondary);
             cursor: pointer;
         }
+
+        .a-jdl-photo {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+        }
     </style>
 @endsection
 
@@ -281,7 +288,7 @@
                 <div class="col-5 p-4">
                     <div class="inner-caption pe-3">
                         <div class="pb-2 border-bottom">
-                            <h6 class="fs-5"><span class="fw-bold">{{ $userdata->username }}
+                            <h6 class="fs-5"><span class="fw-bold"><a href="/profile-{{ $userdata->username }}" class="a-jdl-photo">{{ $userdata->username }}</a>
                                 </span>{{ $foto->judul }}</h6>
                             <p class="tgl-post-photopage mb-1">
                                 {{ \Carbon\Carbon::createFromFormat('Y-m-d', $foto->tanggalfoto)->format('d F Y') }}</p>
@@ -437,7 +444,7 @@
                                 @if ($ppllk->foto == 'default.png')
                                     <img src="assets/default/default.png" class="people-like-img">
                                 @else
-                                    <img src="{{ Storage::url('public/users/'. $ppllk->foto) }}" class="people-like-img">
+                                    <img src="{{ Storage::url('public/users/' . $ppllk->foto) }}" class="people-like-img">
                                 @endif
                                 <h1 class="people-like-user mt-2 ms-2">{{ $ppllk->username }}</h1>
                             </div>
