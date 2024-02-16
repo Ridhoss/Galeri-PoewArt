@@ -1,0 +1,57 @@
+/* packed */
+:root {
+    /* color */
+
+    --primary: #333c4b;
+    --preprimary: #4a4c5c;
+    --bootstrapsecondary: #6c577d;
+    --secondary: #d4a056;
+    --black: #000;
+    --white: #fff;
+    --redpastel: #ff6868;
+    --poppins: poppins;
+}
+@font-face {
+    font-family: poppins;
+    src: url(assets/icon/Poppins-Regular.ttf);
+}
+* {
+    font-family: var(--poppins);
+}
+/* endpacked */
+
+.containers {
+    width: 100%;
+    height: 100vh;
+}
+
+.content-left {
+    background-image: url("../foto/background.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.content-right {
+    overflow: auto;
+}
+
+.btn {
+    background-color: var(--primary);
+    color: #fff;
+    font-size: 18px;
+}
+
+.btn:hover {
+    background-color: var(--black);
+    color: #fff;
+}
+
+.btn-join {
+    color: var(--primary);
+}
+
+.btn-join:hover {
+    color: var(--black);
+}

@@ -1,0 +1,107 @@
+/* packed */
+:root {
+    /* color */
+
+    --primary: #333c4b;
+    --preprimary: #4a4c5c;
+    --bootstrapsecondary: #6c577d;
+    --secondary: #d4a056;
+    --black: #000;
+    --white: #fff;
+    --redpastel: #ff6868;
+    --poppins: poppins;
+}
+@font-face {
+    font-family: poppins;
+    src: url(assets/icon/Poppins-Regular.ttf);
+}
+* {
+    font-family: var(--poppins);
+}
+/* endpacked */
+
+.containers-upload {
+    height: 80vh;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+}
+
+.btn-upload-photo {
+    color: var(--primary);
+    background-color: var(--white);
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+}
+
+.btn-upload-photo:hover {
+    background-color: var(--secondary);
+    color: var(--white);
+    border: 1px solid var(--secondary);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.pre-pilihalbum {
+    height: 50px;
+}
+
+.pilih-album {
+    font-size: 18px;
+    color: var(--primary);
+    font-weight: normal;
+    margin-top: 8px;
+}
+
+.pilih-album:hover {
+    color: var(--secondary);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.terpilih {
+    border-bottom: 2px solid var(--secondary);
+    color: var(--secondary);
+}
+
+.img-ker {
+    width: 200px;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: contain;
+}
+
+.inner-content {
+    height: 85%;
+    overflow: auto;
+}
+
+.footer-inner {
+    height: 15%;
+}
+
+.innerbtnupload {
+    font-size: 30px;
+    color: var(--preprimary);
+}
+
+.innerbtnupload:hover {
+    color: var(--black);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.img-page-profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card {
+    width: 15rem;
+    height: auto;
+}
