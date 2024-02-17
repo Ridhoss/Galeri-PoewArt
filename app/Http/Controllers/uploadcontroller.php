@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\album;
 use App\Models\foto;
 use App\Models\keranjang;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +16,6 @@ class uploadcontroller extends Controller
     // upload keranjang
     public function uploadkeranjang(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'photo' => 'required'
         ]);
@@ -35,7 +35,11 @@ class uploadcontroller extends Controller
             ]);
         }
 
-        return redirect('/upload')->with('berhasil', 'Your post has been uploaded!');
+        if (isset($request->idalbum)) {
+            return redirect('/upload?status=' . $request->idalbum)->with('berhasil', 'Your post has been uploaded!');
+        } else {
+            return redirect('/upload')->with('berhasil', 'Your post has been uploaded!');
+        }
     }
     // hapus keranjang
     public function hapuskeranjang(Request $request)
@@ -48,7 +52,11 @@ class uploadcontroller extends Controller
 
         $data->delete();
 
-        return redirect('/upload')->with('gagal', 'Your post has been deleted!');
+        if (isset($request->idalbum)) {
+            return redirect('/upload?status=' . $request->idalbum)->with('gagal', 'Your post has been deleted!');
+        } else {
+            return redirect('/upload')->with('gagal', 'Your post has been deleted!');
+        }
     }
     // cancel keranjang
     public function cancelkeranjang(Request $request)
@@ -64,6 +72,8 @@ class uploadcontroller extends Controller
             ->where('userId', $id)
             ->get();
 
+        $user = User::find($id);
+
         foreach ($album as $lbm) {
             $fotocount = foto::select('*')
                 ->where('albumId', $lbm->id)
@@ -75,7 +85,11 @@ class uploadcontroller extends Controller
             }
         }
 
-        return redirect('/home');
+        if (isset($request->idalbum)) {
+            return redirect('/seealbums' . $request->idalbum . "?status=albums-" . $user->username);
+        } else {
+            return redirect('/profile-' . $user->username);
+        }
     }
 
     // upload foto

@@ -115,9 +115,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li class="d-flex align-items-center p-2"><a
-                                    class="dropdown-item text-secondary text-decoration-none rounded" href="/profile-{{ $albumuser->username }}"><i
-                                        class="fa-solid fa-user me-3"></i>Open this account's profile</a></li>
+                                    class="dropdown-item text-secondary text-decoration-none rounded"
+                                    href="/profile-{{ $albumuser->username }}"><i class="fa-solid fa-user me-3"></i>Open
+                                    this account's profile</a></li>
                             @if ($album->userId == $user->id)
+                                <li class="d-flex align-items-center p-2"><a href="/upload?status={{ $album->id }}" class="dropdown-item text-secondary text-decoration-none rounded"><i
+                                            class="fa-solid fa-plus me-3"></i>Add Photo to this album</a>
+                                </li>
                                 <li class="d-flex align-items-center p-2"><a
                                         class="dropdown-item text-secondary text-decoration-none rounded"
                                         data-bs-toggle="modal" data-bs-target="#editalbum"><i
@@ -135,7 +139,8 @@
                 </div>
             </div>
             @if ($albumuser->foto == 'default.png')
-                <h2 class="info-albumpage"><a href="/profile-{{ $albumuser->username }}" class="p-2"><img src="assets/default/default.png"
+                <h2 class="info-albumpage"><a href="/profile-{{ $albumuser->username }}" class="p-2"><img
+                            src="assets/default/default.png"
                             class="img-info-albumbpage me-2">{{ $albumuser->username }}</a>, <span>{{ $countfoto }}
                         Photo</span></h2>
             @else

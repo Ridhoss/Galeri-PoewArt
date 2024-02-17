@@ -97,6 +97,9 @@
 
                 <form action="/uploadkeranjang" method="POST" enctype="multipart/form-data" id="uploadkeranjang">
                     @csrf
+                    @if ($status != null)
+                        <input type="hidden" name="idalbum" value="{{ $status }}">
+                    @endif
                     <input type="hidden" name="iduser" value="{{ $user->id }}">
                     <input type="file" class="form-control d-none" name="photo[]" id="fileinput" multiple
                         onchange="uploadkeranjang()">
@@ -104,34 +107,53 @@
 
                 <button class="btn-upload-photo mt-2" id="btnuploadphoto">Upload New Photo</button>
 
-                <div
-                    class="d-flex mt-4 justify-content-evenly align-items-center border-top border-bottom p-1 pre-pilihalbum ">
-                    <h6 class="pilih-album terpilih" id="btnpilihalbum">Choose Album</h6>
-                    <h6 class="pilih-album" id="btnalbumbaru" data-bs-toggle="modal" data-bs-target="#newalbum">New
-                        Album</h6>
-                </div>
+                @if ($status == null)
+                    <div
+                        class="d-flex mt-4 justify-content-evenly align-items-center border-top border-bottom p-1 pre-pilihalbum ">
+                        <h6 class="pilih-album terpilih" id="btnpilihalbum">Choose Album</h6>
+                        <h6 class="pilih-album" id="btnalbumbaru" data-bs-toggle="modal" data-bs-target="#newalbum">New
+                            Album</h6>
+                    </div>
+                @endif
 
                 <form action="/uploadphoto" method="POST">
                     @csrf
-                    <div class="my-3">
-                        <select name="choosealbum" id="pilihalbum" class="form-control" required>
-                            <option value="" disabled selected>Choose Album</option>
-                            @foreach ($album as $dataal)
-                                <option value="{{ $dataal->id }}" data-name="{{ $dataal->nama }}"
-                                    data-description="{{ $dataal->deskripsi }}">{{ $dataal->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="w-100 mb-3 mt-3">
-                        <h6>Album name</h6>
-                        <input type="text" class="form-control" name="album_name" placeholder="Album Name"
-                            id="albumname" readonly disabled>
-                    </div>
-                    <div class="w-100 mb-3">
-                        <h6>Album description</h6>
-                        <textarea name="album_description" cols="30" rows="3" placeholder="Album Description"
-                            class="form-control" id="descriptionalbum" readonly disabled></textarea>
-                    </div>
+                    @if ($status == null)
+                        <div class="my-3">
+                            <select name="choosealbum" id="pilihalbum" class="form-control" required>
+                                <option value="" disabled selected>Choose Album</option>
+                                @foreach ($album as $dataal)
+                                    <option value="{{ $dataal->id }}" data-name="{{ $dataal->nama }}"
+                                        data-description="{{ $dataal->deskripsi }}">{{ $dataal->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="w-100 mb-3 mt-3">
+                            <h6>Album name</h6>
+                            <input type="text" class="form-control" name="album_name" placeholder="Album Name"
+                                id="albumname" readonly disabled>
+                        </div>
+                        <div class="w-100 mb-3">
+                            <h6>Album description</h6>
+                            <textarea name="album_description" cols="30" rows="3" placeholder="Album Description"
+                                class="form-control" id="descriptionalbum" readonly disabled></textarea>
+                        </div>
+                    @else
+                        <input type="hidden" name="choosealbum" value="{{ $status }}">
+                        @foreach ($album as $al)
+                            <div class="w-100 mb-3 mt-3">
+                                <h6>Album name</h6>
+                                <input type="text" class="form-control" name="album_name"
+                                    placeholder="Album Name" id="albumname" value="{{ $al->nama }}" readonly
+                                    disabled>
+                            </div>
+                            <div class="w-100 mb-3">
+                                <h6>Album description</h6>
+                                <textarea name="album_description" cols="30" rows="3" placeholder="Album Description"
+                                    class="form-control" id="descriptionalbum" readonly disabled>{{ $al->deskripsi }}</textarea>
+                            </div>
+                        @endforeach
+                    @endif
 
 
             </div>
@@ -190,6 +212,9 @@
                     </div>
                     <form action="/hapuskeranjang" method="POST">
                         @csrf
+                        @if ($status != null)
+                            <input type="hidden" name="idalbum" value="{{ $status }}">
+                        @endif
                         <input type="hidden" name="id" value="{{ $data->id }}">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -213,6 +238,9 @@
                 <form action="/cancelkeranjang" method="POST">
                     @csrf
                     <input type="hidden" name="id" value="{{ $user->id }}">
+                    @if ($status != null)
+                        <input type="hidden" name="idalbum" value="{{ $status }}">
+                    @endif
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Back To Home</button>
@@ -261,14 +289,6 @@
 
         var albumname = document.getElementById('albumname');
         var descriptionalbum = document.getElementById('descriptionalbum');
-        var pilihalbum = document.getElementById('pilihalbum');
-
-        pilihalbum.addEventListener('change', function() {
-            const selectedOption = pilihalbum.options[pilihalbum.selectedIndex];
-
-            albumname.value = selectedOption.getAttribute('data-name');
-            descriptionalbum.value = selectedOption.getAttribute('data-description');
-        });
 
         // akhir ambil data
 
@@ -285,6 +305,15 @@
             var form = document.getElementById('uploadkeranjang');
             form.submit();
         }
+
+        var pilihalbum = document.getElementById('pilihalbum');
+
+        pilihalbum.addEventListener('change', function() {
+            const selectedOption = pilihalbum.options[pilihalbum.selectedIndex];
+
+            albumname.value = selectedOption.getAttribute('data-name');
+            descriptionalbum.value = selectedOption.getAttribute('data-description');
+        });
     </script>
 
     {{-- close alert --}}
