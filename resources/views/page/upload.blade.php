@@ -44,28 +44,32 @@
     @endif
 
     @error('photo')
-        <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4" role="alert">
+        <div class="alert z-3 alert-danger alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4"
+            role="alert">
             <strong>Data Failed!</strong> {{ $message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @enderror
 
     @error('choosealbum')
-        <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4" role="alert">
+        <div class="alert z-3 alert-danger alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4"
+            role="alert">
             <strong>Data Failed!</strong> {{ $message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @enderror
 
     @error('album_name')
-        <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4" role="alert">
+        <div class="alert z-3 alert-danger alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4"
+            role="alert">
             <strong>Data Failed!</strong> {{ $message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @enderror
 
     @error('album_description')
-        <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4" role="alert">
+        <div class="alert z-3 alert-danger alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4"
+            role="alert">
             <strong>Data Failed!</strong> {{ $message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -139,7 +143,7 @@
                                 class="form-control" id="descriptionalbum" readonly disabled></textarea>
                         </div>
                     @else
-                        <input type="hidden" name="choosealbum" value="{{ $status }}">
+                        <input type="hidden" name="choosealbum" value="{{ $status }}" required>
                         @foreach ($album as $al)
                             <div class="w-100 mb-3 mt-3">
                                 <h6>Album name</h6>
@@ -305,7 +309,9 @@
             var form = document.getElementById('uploadkeranjang');
             form.submit();
         }
+    </script>
 
+    <script>
         var pilihalbum = document.getElementById('pilihalbum');
 
         pilihalbum.addEventListener('change', function() {

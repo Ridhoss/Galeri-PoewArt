@@ -88,7 +88,7 @@
                                 <div class="pb-1 mb-1 border-bottom d-flex align-items-center">
                                     @if ($fllwrs->foto == 'default.png')
                                         <img src="assets/default/default.png" class="people-like-img">
-                                    @else
+                                    @elsexz
                                         <img src="{{ Storage::url('public/users/' . $fllwrs->foto) }}"
                                             class="people-like-img">
                                     @endif
