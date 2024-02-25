@@ -38,27 +38,32 @@ class Controller extends BaseController
     {
         return view('register');
     }
-    // home
-    public function halamanhome()
-    {
-        $foto = foto::inRandomOrder();
+   // home
+   public function halamanhome()
+   {
+       $foto = foto::select('*')
+           ->selectRaw('(SELECT COUNT(*) FROM likefotos WHERE likefotos.fotoId = fotos.id) AS total_like')
+           ->selectRaw('(SELECT COUNT(*) FROM komentars WHERE komentars.fotoId = fotos.id) AS total_komen')
+           ->inRandomOrder();
 
-        $today = date('Y-m-d');
+       $today = date('Y-m-d');
 
-        $currentTime = date('Y-m-d H:i:s');
+       $currentTime = date('Y-m-d H:i:s');
 
-        $new = foto::select('*')
-            ->where('tanggalfoto', $today)
-            ->whereRaw("TIMESTAMPDIFF(MINUTE, created_at, '$currentTime') < 10")
-            ->orderBy('id', 'desc');
+       $new = foto::select('*')
+           ->where('tanggalfoto', $today)
+           ->selectRaw('(SELECT COUNT(*) FROM likefotos WHERE likefotos.fotoId = fotos.id) AS total_like')
+           ->selectRaw('(SELECT COUNT(*) FROM komentars WHERE komentars.fotoId = fotos.id) AS total_komen')
+           ->whereRaw("TIMESTAMPDIFF(MINUTE, created_at, '$currentTime') < 5")
+           ->orderBy('id', 'desc');
 
-        return view('page.home', [
-            'user' => Auth::user(),
-            'foto' => $foto->get(),
-            'new' => $new->get(),
-            'countnew' => $new->count()
-        ]);
-    }
+       return view('page.home', [
+           'user' => Auth::user(),
+           'foto' => $foto->get(),
+           'new' => $new->get(),
+           'countnew' => $new->count()
+       ]);
+   }
 
     // halaman like
     public function halamanlike()
