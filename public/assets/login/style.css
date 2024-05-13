@@ -23,16 +23,17 @@
 .containers {
     width: 100%;
     height: 100vh;
-    background-image: url("../foto/background.jpg");
+    /* background-image: url("../foto/background.jpg");
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
+    background-color: var(--white);
     z-index: -1;
 }
 
 .content {
-    width: 700px;
+    width: 80vh;
     height: 500px;
     background-color: #fff;
     border-radius: 20px;
@@ -48,7 +49,7 @@
 }
 
 .btn:hover {
-    background-color: var(--black);
+    background-color: var(--secondary);
     color: #fff;
 }
 
@@ -57,5 +58,5 @@
 }
 
 .btn-join:hover {
-    color: var(--black);
+    color: var(--secondary);
 }

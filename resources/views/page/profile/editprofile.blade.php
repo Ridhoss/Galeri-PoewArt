@@ -17,8 +17,12 @@
 {{-- icon --}}
 <link rel="stylesheet" href="assets/icon/all.min.css">
 <script src="assets/icon/all.min.js"></script>
-    {{-- logo atas --}}
-    <link rel="shortcut icon" type="image/png" href="assets/default/logoatas.png" />
+{{-- logo atas --}}
+<link rel="shortcut icon" type="image/png" href="assets/default/logoatas.png" />
+
+{{-- Sweet Alert --}}
+<link rel="stylesheet" href="assets/sw/sweetalert2.min.css">
+<script src="assets/sw/sweetalert2.all.min.js"></script>
 
 <style>
     /* packed */
@@ -118,23 +122,6 @@
 
 
     {{-- alert --}}
-
-    @if (session()->has('berhasil'))
-        <div class="alert z-3 alert-success alert-dismissible fade show position-absolute top-0 end-0 mt-4 me-4"
-            role="alert">
-            <strong>Data Successfully!</strong> {{ session('berhasil') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-
-    @if (session()->has('gagal'))
-        <div class="alert z-3 alert-danger alert-dismissible fade show position-absolute top-0 end-0 mt-4 me-4"
-            role="alert">
-            <strong>Data Failed!</strong> {{ session('gagal') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-
     @error('first_name')
         <div class="alert z-3 alert-danger alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4"
             role="alert">
@@ -257,7 +244,7 @@
                                 </div>
                                 <div class="w-100 px-5 mb-4">
                                     <h6>Email</h6>
-                                    <input type="text" class="form-control" name="email" placeholder="Email"
+                                    <input type="email" class="form-control" name="email" placeholder="Email"
                                         value="{{ $user->email }}" required>
                                 </div>
                                 <div class="w-100 px-5 mb-4">
@@ -333,6 +320,30 @@
         </div>
     </div>
 
+    {{-- script --}}
+
+    {{-- alert --}}
+    @if (session()->has('berhasil'))
+        <script>
+            Swal.fire({
+                title: "Successfully!",
+                text: "{{ session('berhasil') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
+
+    @if (session()->has('gagal'))
+        <script>
+            Swal.fire({
+                title: "Failed!",
+                text: "{{ session('gagal') }}",
+                icon: "error"
+            });
+        </script>
+    @endif
+
+    {{-- another script --}}
     <script>
         // mengalihkan fungsi tombol menjadi input file
         document.getElementById('tombol-edit-foto-profile').addEventListener('click', function() {

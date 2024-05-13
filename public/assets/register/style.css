@@ -34,7 +34,7 @@
 }
 
 .content-right {
-    overflow: auto;
+    overflow: hidden;
 }
 
 .btn {
@@ -44,7 +44,7 @@
 }
 
 .btn:hover {
-    background-color: var(--black);
+    background-color: var(--secondary);
     color: #fff;
 }
 
@@ -53,5 +53,5 @@
 }
 
 .btn-join:hover {
-    color: var(--black);
+    color: var(--secondary);
 }

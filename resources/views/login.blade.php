@@ -13,6 +13,7 @@
     <script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="assets/bootsrap/masonry-docs.css">
     <script src="assets/bootstrap/masonry-docs.min.js"></script>
+
     {{-- icon --}}
     <link rel="stylesheet" href="assets/icon/all.min.css">
     <script src="assets/icon/all.min.js"></script>
@@ -22,41 +23,50 @@
     {{-- vanilla css --}}
     <link rel="stylesheet" href="assets/login/style.css">
 
+    {{-- Sweet Alert --}}
+    <link rel="stylesheet" href="assets/sw/sweetalert2.min.css">
+    <script src="assets/sw/sweetalert2.all.min.js"></script>
+
+
 </head>
 
 <body>
 
     {{-- alert --}}
 
-    @if (session()->has('register'))
+    {{-- @if (session()->has('register'))
         <div class="alert alert-success alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4 z-2"
             role="alert">
             <strong>Registration is successful!</strong> Please log in with your account!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif
+    @endif --}}
 
-    @if (session()->has('gagallogin'))
+    {{-- @if (session()->has('gagallogin'))
         <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 end-0 me-4 mt-4 z-2"
             role="alert">
             <strong>Log in Failed!</strong> Your username or password is incorrect!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif
+    @endif --}}
 
     {{-- end alert --}}
 
-    <div class="containers d-flex align-items-center justify-content-center">
+    <div class="containers d-flex align-items-center justify-content-evenly">
+        <div class="d-none d-md-block">
+            <img src="assets/login/1.png">
+        </div>
         <div class="content d-flex align-items-center flex-column p-4">
-            <h1>Sign In</h1>
-            <p class="fs-5">Welcome Back</p>
+            <h1 class="fw-bold">Sign In</h1>
+            <p class="fs-5">Welcome To <span class="fw-bold">PoewArt.</span></p>
 
             <div class="body w-100 mt-3 border-bottom pb-4">
                 <form action="/log" method="post">
                     @csrf
                     <div class="w-100 px-5 mb-3">
                         <h6>Username</h6>
-                        <input type="text" class="form-control" name="username" required>
+                        <input type="text" class="form-control" name="username" value="{{ old('username') }}"
+                            required>
                     </div>
 
                     <div class="w-100 px-5 mb-4">
@@ -79,6 +89,29 @@
     </div>
 
     {{-- script --}}
+
+    {{-- alert --}}
+    @if (session()->has('gagallogin'))
+        <script>
+            Swal.fire({
+                title: "Login Failed!",
+                text: "Your username or password is incorrect!",
+                icon: "error"
+            });
+        </script>
+    @endif
+
+    @if (session()->has('register'))
+        <script>
+            Swal.fire({
+                title: "Registration is successful!",
+                text: "Please login with your account!",
+                icon: "success"
+            });
+        </script>
+    @endif
+
+    {{-- another script --}}
     <script>
         const alertElement = document.querySelector('.alert');
         alertElement.classList.add('show');

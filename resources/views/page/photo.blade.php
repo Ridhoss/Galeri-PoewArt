@@ -242,8 +242,7 @@
                             @csrf
                             <input type="hidden" name="idfoto" value="{{ $foto->id }}">
                             <input type="hidden" name="iduser" value="{{ $user->id }}">
-                            <button type="submit" class="likesubmit" id="likebtn"
-                                onclick="this.disabled=true;this.form.submit();"><i
+                            <button type="submit" class="likesubmit" id="likebtn"><i
                                     class="icon fa-regular fa-heart bliked p-2 rounded fs-5"></i></button>
                         </form>
                     @else
@@ -288,7 +287,8 @@
                 <div class="col-5 p-4">
                     <div class="inner-caption pe-3">
                         <div class="pb-2 border-bottom">
-                            <h6 class="fs-5"><span class="fw-bold"><a href="/profile-{{ $userdata->username }}" class="a-jdl-photo">{{ $userdata->username }}</a>
+                            <h6 class="fs-5"><span class="fw-bold"><a href="/profile-{{ $userdata->username }}"
+                                        class="a-jdl-photo">{{ $userdata->username }}</a>
                                 </span>{{ $foto->judul }}</h6>
                             <p class="tgl-post-photopage mb-1">
                                 {{ \Carbon\Carbon::createFromFormat('Y-m-d', $foto->tanggalfoto)->format('d F Y') }}</p>
@@ -438,23 +438,50 @@
                 </div>
                 <div class="modal-body">
 
+                    @if ($totallike == 0)
+                        <p class="text-center text-secondary mt-2">--- No one likes your post! ---</p>
+                    @else
                     @foreach ($peoplelike as $ppllk)
-                        <a href="/profile-{{ $ppllk->username }}" class="sem-acc">
-                            <div class="pb-1 mb-1 border-bottom d-flex align-items-center">
-                                @if ($ppllk->foto == 'default.png')
-                                    <img src="assets/default/default.png" class="people-like-img">
-                                @else
-                                    <img src="{{ Storage::url('public/users/' . $ppllk->foto) }}" class="people-like-img">
-                                @endif
-                                <h1 class="people-like-user mt-2 ms-2">{{ $ppllk->username }}</h1>
-                            </div>
-                        </a>
-                    @endforeach
+                    <a href="/profile-{{ $ppllk->username }}" class="sem-acc">
+                        <div class="pb-1 mb-1 border-bottom d-flex align-items-center">
+                            @if ($ppllk->foto == 'default.png')
+                                <img src="assets/default/default.png" class="people-like-img">
+                            @else
+                                <img src="{{ Storage::url('public/users/' . $ppllk->foto) }}"
+                                    class="people-like-img">
+                            @endif
+                            <h1 class="people-like-user mt-2 ms-2">{{ $ppllk->username }}</h1>
+                        </div>
+                    </a>
+                @endforeach                     
+                    @endif
 
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- script --}}
+
+    {{-- alert --}}
+    @if (session()->has('like'))
+        <script>
+            Swal.fire({
+                title: "Succesfully!",
+                text: "{{ session('like') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
+    {{-- @if (session()->has('dislike'))
+        <script>
+            Swal.fire({
+                title: "Succesfully!",
+                text: "{{ session('dislike') }}",
+                icon: "success"
+            });
+        </script>
+    @endif --}}
 
 
     <script>

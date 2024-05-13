@@ -18,7 +18,7 @@ class likecommentcontroller extends Controller
             'tanggallike' => date('Y-m-d')
         ]);
 
-        return back();
+        return back()->with('like','You Liked This Post!');
     }
     // unlike
     public function aksiunlike(Request $request)
@@ -30,7 +30,7 @@ class likecommentcontroller extends Controller
 
         $unlike->delete();
 
-        return back();
+        return back()->with('dislike','You Dislike This Post!');
     }
     // aksi comment
     public function aksicomment(Request $request)

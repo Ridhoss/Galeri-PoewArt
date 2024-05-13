@@ -23,7 +23,8 @@ class logincontroller extends Controller
 
         if ($validator->fails()) {
             return redirect('/register')
-                ->withErrors($validator);
+                ->withErrors($validator)
+                ->withInput();
         }
 
         // hashing password
@@ -58,7 +59,7 @@ class logincontroller extends Controller
             return redirect()->intended('/home');
         }
 
-        return back()->with('gagallogin', '');
+        return back()->with('gagallogin', '')->withInput();
     }
 
     // logout

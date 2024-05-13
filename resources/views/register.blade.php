@@ -64,54 +64,72 @@
         </div>
     @enderror
 
+
     {{-- end alert --}}
 
     <div class="containers d-flex">
         <div class="col-4 content-left">
             {{-- <img src="assets/foto/background.jpg"> --}}
         </div>
-        <div class="col-8 content-right d-flex align-items-center flex-column p-5">
-            <h1 class="fs-1">Join PoewArt.</h1>
-            <p class="fs-6">Already have an account? <a class="btn-join" href="/">Sign In</a></p>
+        <div class="col-8 content-right p-4 d-flex align-items-center justify-content-center">
+            <div class="d-flex align-items-center flex-column">
+                <h1 class="fs-1 fw-bold">Join PoewArt.</h1>
+                <p class="fs-6">Already have an account? <a class="btn-join" href="/">Sign In</a></p>
 
 
-            <form action="/reg" method="post">
-                @csrf
-                <div class="body w-100 mt-3 p-4">
-                    <div class="d-flex mb-3 px-5">
-                        <div class="w-100 me-4">
-                            <h6>First Name</h6>
-                            <input type="text" class="form-control" name="first_name" required>
+                <form action="/reg" method="post">
+                    @csrf
+                    <div class="body w-100 mt-1 p-4">
+                        <div class="d-flex mb-3 px-5">
+                            <div class="w-100 me-4">
+                                <h6>First Name</h6>
+                                <input type="text"
+                                    class="form-control @error('record')
+                                        is-invalid
+                                    @enderror"
+                                    name="first_name" value="{{ old('first_name') }}" required>
+                            </div>
+                            <div class="w-100">
+                                <h6>Last Name</h6>
+                                <input type="text" class="form-control @error('last_name')
+                                is-invalid
+                            @enderror" value="{{ old('last_name') }}"
+                                    name="last_name">
+                            </div>
                         </div>
-                        <div class="w-100">
-                            <h6>Last Name</h6>
-                            <input type="text" class="form-control" name="last_name">
+
+                        <div class="w-100 px-5 mb-4">
+                            <h6>Email</h6>
+                            <input type="email" class="form-control @error('email')
+                            is-invalid
+                        @enderror" name="email" value="{{ old('email') }}"
+                                required>
+                        </div>
+
+                        <div class="w-100 px-5 mb-4">
+                            <h6>Username</h6>
+                            <input type="text" class="form-control @error('username')
+                            is-invalid
+                        @enderror" name="username" value="{{ old('username') }}"
+                                required>
+                        </div>
+
+                        <div class="w-100 px-5 mb-4">
+                            <h6>Password <span class="text-secondary">(min. 8 char)</span></h6>
+                            <input type="password" class="form-control @error('password')
+                            is-invalid
+                        @enderror" name="password" required>
+                        </div>
+
+                        <div class="w-100 px-5">
+                            <button class="btn w-100" type="submit">Sign Up</button>
                         </div>
                     </div>
 
-                    <div class="w-100 px-5 mb-4">
-                        <h6>Email</h6>
-                        <input type="text" class="form-control" name="email" required>
-                    </div>
+                </form>
 
-                    <div class="w-100 px-5 mb-4">
-                        <h6>Username</h6>
-                        <input type="text" class="form-control" name="username" required>
-                    </div>
-
-                    <div class="w-100 px-5 mb-4">
-                        <h6>Password <span class="text-secondary">(min. 8 char)</span></h6>
-                        <input type="password" class="form-control" name="password" required>
-                    </div>
-
-                    <div class="w-100 px-5">
-                        <button class="btn w-100" type="submit">Sign Up</button>
-                    </div>
-                </div>
-
-            </form>
-
-            <p class="fs-6">By joining, you agree to the Terms and Privacy Policy</p>
+                <p class="fs-6">By joining, you agree to the Terms and Privacy Policy</p>
+            </div>
 
         </div>
     </div>

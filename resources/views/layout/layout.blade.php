@@ -20,6 +20,10 @@
     {{-- logo atas --}}
     <link rel="shortcut icon" type="image/png" href="assets/default/logoatas.png" />
 
+    {{-- Sweet Alert --}}
+    <link rel="stylesheet" href="assets/sw/sweetalert2.min.css">
+    <script src="assets/sw/sweetalert2.all.min.js"></script>
+
     {{-- vanilla --}}
     <link rel="stylesheet" href="assets/layout/style.css">
 
